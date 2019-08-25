@@ -1,7 +1,8 @@
 #include "BWAPIOpponentView.h"
 #include <BWAPI\Game.h>
+#include <boost/range/algorithm/find_if.hpp>
 
-AKBot::BWAPIOpponentView::BWAPIOpponentView(BWAPI::Game* game): _game(game)
+AKBot::BWAPIOpponentView::BWAPIOpponentView(BWAPI::Game* game) noexcept: _game(game)
 {
 }
 
@@ -20,12 +21,12 @@ BWAPI::Player AKBot::BWAPIOpponentView::defaultEnemy() const
 
 	if (defaultEnemy->leftGame() || defaultEnemy->isDefeated())
 	{
-		for (const auto& enemy : _game->enemies())
+		const auto foundEnemy = boost::find_if(_game->enemies(), [](const auto& enemy) {
+			return !enemy->leftGame() && !enemy->isDefeated();
+		});
+		if (foundEnemy != boost::end(_game->enemies()))
 		{
-			if (!enemy->leftGame() && !enemy->isDefeated())
-			{
-				return enemy;
-			}
+			return *foundEnemy;
 		}
 	}
 

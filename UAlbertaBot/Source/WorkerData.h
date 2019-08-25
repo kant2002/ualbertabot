@@ -16,15 +16,16 @@ public:
     int gasNeeded;
     BWAPI::Position position;
 
-    WorkerMoveData(int m,int g,BWAPI::Position p)
+    WorkerMoveData(int m,int g,BWAPI::Position p) noexcept
         : mineralsNeeded(m)
         ,gasNeeded(g)
         ,position(p)
     {
-
     }
 
-    WorkerMoveData() {}
+    WorkerMoveData()
+		: gasNeeded(0), mineralsNeeded(0), position(0, 0)
+	{}
 };
 
 class WorkerData

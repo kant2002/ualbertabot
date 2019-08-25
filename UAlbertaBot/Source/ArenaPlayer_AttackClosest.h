@@ -17,9 +17,9 @@ public:
 
 	explicit ArenaPlayer_AttackClosest(std::shared_ptr<OpponentView> opponentView);
 
-    void onStart();
-    void onFrame(int currentFrame);
-    void onBattleBegin();
-    void onBattleEnd();
+    void onStart() override;
+    void onFrame(int currentFrame) override;
+    void onBattleBegin() override;
+    void onBattleEnd() override;
 };
 }
