@@ -25,7 +25,7 @@ UAlbertaBotModule_dll::UAlbertaBotModule_dll()
     }
 
 	std::string botMode = Config.BotInfo.BotMode;
-	auto m = createBot(botMode, Config, configurationFile);
+	auto m = createBot(BWAPI::BroodwarPtr, botMode, Config, configurationFile);
 	_module = m.getBot();
 	if (!m.isValid())
 	{
