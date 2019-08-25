@@ -131,7 +131,15 @@ struct BotMicroConfiguration
 	// Strategy for estimation of the combat results.
 	std::string CombatEstimationStrategy = "sparcraft";
 	int CombatEstimationDepth = 96; // Depth of combat simulation depth.
+
+	// Indicates that workers will be included into attacker force.
+	// Only workers closer then WorkerIgnoreDistance will be included.
 	bool IncludeWorkers = true;
+
+	// Distance starting from which workers will always will be ignored
+	// as attacing unit. Units which does not have bot units closer then specified
+	// amount will always be ignored during estimation process.
+	int WorkerIgnoreDistance = 64;
 };
 
 struct BotMacroConfiguration
