@@ -8,7 +8,9 @@
 
 using namespace SparCraft;
 
-PlayerBenchmark::PlayerBenchmark(const rapidjson::Value & value)
+PlayerBenchmark::PlayerBenchmark(
+	const AIParameters& aiParameters,
+	const rapidjson::Value & value)
     : _gamesPlayed(0)
     , _totalGameTurns(0)
     , _timeLimitSec(0)
@@ -18,6 +20,7 @@ PlayerBenchmark::PlayerBenchmark(const rapidjson::Value & value)
     , _doPlayoutEvalStats(false)
     , _doSearchStats(false)
     , _doEvalStats(false)
+	, _aiParameters(aiParameters)
 {
     SPARCRAFT_ASSERT(value.HasMember("name") && value["name"].IsString(), "PlayerBenchmark must have Name string");
     SPARCRAFT_ASSERT(value.HasMember("PlayerOne") && value["PlayerOne"].IsString(), "PlayerBenchmark must have PlayerOne string");
@@ -32,8 +35,8 @@ PlayerBenchmark::PlayerBenchmark(const rapidjson::Value & value)
     JSONTools::ReadInt("RandomCards", value, _randomCards);
     JSONTools::ReadInt("UpdateIntervalSec", value, _writeIntervalSec);
 
-    _players[Players::Player_One] = AIParameters::Instance().getPlayer(Players::Player_One, _playerNames[Players::Player_One]);
-    _players[Players::Player_Two] = AIParameters::Instance().getPlayer(Players::Player_Two, _playerNames[Players::Player_Two]);
+    _players[Players::Player_One] = _aiParameters.getPlayer(Players::Player_One, _playerNames[Players::Player_One]);
+    _players[Players::Player_Two] = _aiParameters.getPlayer(Players::Player_Two, _playerNames[Players::Player_Two]);
 
     _wins[0] = 0;
     _wins[1] = 0;

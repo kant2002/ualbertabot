@@ -1,6 +1,5 @@
 #include "TorchTools.h"
-#include "../AllPlayers.h"
-#include "../AIParameters.h"
+#include "../AllPlayers.h"	
 
 using namespace SparCraft;
 
@@ -49,7 +48,7 @@ GameState TorchTools::GetSparCraftStateFromTorchCraftFrameFile(const std::string
 	return GetSparCraftStateFromTorchCraftFrameStream(fin);
 }
 
-void TorchTools::PrintMoveFromFrameStream(std::istream & sin)
+void TorchTools::PrintMoveFromFrameStream(const AIParameters& aiParameters, std::istream & sin)
 {
     std::string aiPlayerName;
     int playerID = 0, mapWidth = 0, mapHeight = 0;
@@ -57,15 +56,15 @@ void TorchTools::PrintMoveFromFrameStream(std::istream & sin)
     sin >> aiPlayerName >> playerID >> mapWidth >> mapHeight;
 
     GameState state = TorchTools::GetSparCraftStateFromTorchCraftFrameStream(sin);
-    state.setMap(std::shared_ptr<Map>(new Map(mapWidth, mapHeight)));
+    state.setMap(std::make_shared<Map>(mapWidth, mapHeight));
 
-    PlayerPtr player = AIParameters::Instance().getPlayer(playerID, aiPlayerName);
+    PlayerPtr player = aiParameters.getPlayer(playerID, aiPlayerName);
     Move m;
     player->getMove(state, m);
     std::cout << TorchTools::GetMoveStringLUA(state, m);
 }
 
-void TorchTools::PrintStateValueFromFrameStream(std::istream & sin)
+void TorchTools::PrintStateValueFromFrameStream(const AIParameters& aiParameters, std::istream & sin)
 {
     std::string playerNames[2];
     int mapWidth = 0, mapHeight = 0;
@@ -73,9 +72,11 @@ void TorchTools::PrintStateValueFromFrameStream(std::istream & sin)
     sin >> playerNames[0] >> playerNames[1] >> mapWidth >> mapHeight;
 
     GameState state = TorchTools::GetSparCraftStateFromTorchCraftFrameStream(sin);
-    state.setMap(std::shared_ptr<Map>(new Map(mapWidth, mapHeight)));
+    state.setMap(std::make_shared<Map>(mapWidth, mapHeight));
 
-    std::cout << Eval::EvalSim(state, 0, AIParameters::Instance().getPlayer(0, playerNames[0]), AIParameters::Instance().getPlayer(1, playerNames[1]), 0).val();
+	const auto player1 = aiParameters.getPlayer(0, playerNames[0]);
+	const auto player2 = aiParameters.getPlayer(1, playerNames[1]);
+    std::cout << Eval::EvalSim(state, 0, player1, player2, 0).val();
 }
 
 Move TorchTools::GetMove(const GameState & state, const size_t & playerID, const std::string & aiPlayerName)

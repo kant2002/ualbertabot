@@ -3,7 +3,7 @@
 
 using namespace SparCraft;
 
-void Benchmarks::DoBenchmarks(const std::string & filename)
+void Benchmarks::DoBenchmarks(const AIParameters& aiParameters, const std::string & filename)
 {
     rapidjson::Document document;
     bool parsingFailed = document.Parse(FileUtils::ReadFile(filename).c_str()).HasParseError();
@@ -32,12 +32,12 @@ void Benchmarks::DoBenchmarks(const std::string & filename)
 
         if (benchmarkType == "PlayerBenchmark")
         {
-            //PlayerBenchmark bm(benchmarks[b]);
+            //PlayerBenchmark bm(aiParameters, benchmarks[b]);
             //DoPlayerBenchmark(bm);
         }
         else if (benchmarkType == "Tournament")
         {
-            DoTournamentBenchmark(benchmarks[b], document);
+            DoTournamentBenchmark(aiParameters, benchmarks[b], document);
         }
         else
         {
@@ -46,9 +46,9 @@ void Benchmarks::DoBenchmarks(const std::string & filename)
     }
 }
 
-void Benchmarks::DoTournamentBenchmark(const rapidjson::Value & value, const rapidjson::Value & rootValue)
+void Benchmarks::DoTournamentBenchmark(const AIParameters& aiParameters, const rapidjson::Value & value, const rapidjson::Value & rootValue)
 {
-    Tournament tournament;
+    Tournament tournament(aiParameters);
     tournament.run(value, rootValue);
 }
 

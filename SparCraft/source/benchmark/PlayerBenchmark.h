@@ -9,6 +9,7 @@ namespace SparCraft
  
 class PlayerBenchmark 
 {
+	const AIParameters& _aiParameters;
     std::string         _benchmarkName;
     std::string         _date;
     PlayerPtr           _players[2];
@@ -74,7 +75,7 @@ class PlayerBenchmark
 
 public:
     
-    PlayerBenchmark(const rapidjson::Value & value);
+    PlayerBenchmark(const AIParameters& aiParameters, const rapidjson::Value & value);
 
     void run();
 

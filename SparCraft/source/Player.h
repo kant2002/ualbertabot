@@ -38,7 +38,7 @@ public:
     virtual void		    getMove(const GameState & state, Move & move);
     const size_t            ID();
     virtual void            setName(const std::string & name);
-    virtual PlayerPtr       clone();
+    virtual PlayerPtr       clone() const;
     virtual void            startTimer();
     virtual void            stopTimer();
 

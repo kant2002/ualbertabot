@@ -260,7 +260,7 @@ bool Squad::needsToRegroup(shared_ptr<MapTools> map, int currentFrame)
 		return false;
 	}
 
-	auto simulationCenter = unitClosest->getPosition();
+	const auto simulationCenter = unitClosest->getPosition();
 	std::vector<BWAPI::Unit> ourCombatUnits;
 	UnitUtil::getUnitsInRadius(
 		_opponentView,
@@ -277,7 +277,9 @@ bool Squad::needsToRegroup(shared_ptr<MapTools> map, int currentFrame)
 	}
 
 	//do the SparCraft Simulation!
-	CombatSimulation sim(_opponentView, _logger, _sparcraftConfiguration, _microConfiguration);
+	// Assume that we have global AIParameters initialized somewhere else.
+	extern SparCraft::AIParameters aiParameters;
+	CombatSimulation sim(_opponentView, _logger, aiParameters, _sparcraftConfiguration, _microConfiguration);
 	auto isWinPredicted = sim.isWinPredicted(ourCombatUnits, enemyCombatUnitsForSimulation, currentFrame);
 	if (_debugConfiguration.DrawCombatSimulationInfo)
 	{

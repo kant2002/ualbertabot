@@ -1,5 +1,4 @@
 #include "CombatSearchExperiment.h"
-#include "BOSSParameters.h"
 
 using namespace BOSS;
 
@@ -9,7 +8,7 @@ CombatSearchExperiment::CombatSearchExperiment()
 
 }
 
-CombatSearchExperiment::CombatSearchExperiment(const std::string & name, const rapidjson::Value & val)
+CombatSearchExperiment::CombatSearchExperiment(const BOSSParameters& parameters, const std::string & name, const rapidjson::Value & val)
     : _race(Races::None)
     , _name(name)
 {
@@ -25,7 +24,7 @@ CombatSearchExperiment::CombatSearchExperiment(const std::string & name, const r
     _race = Races::GetRaceID(val["Race"].GetString());
 
     BOSS_ASSERT(val.HasMember("State") && val["State"].IsString(), "CombatSearchExperiment must have a 'State' string");
-    _params.setInitialState(BOSSParameters::Instance().GetState(val["State"].GetString()));
+    _params.setInitialState(parameters.GetState(val["State"].GetString()));
 
     BOSS_ASSERT(val.HasMember("FrameTimeLimit") && val["FrameTimeLimit"].IsInt(), "CombatSearchExperiment must have a 'FrameTimeLimit' int");
     _params.setFrameTimeLimit(val["FrameTimeLimit"].GetInt());
@@ -78,7 +77,7 @@ CombatSearchExperiment::CombatSearchExperiment(const std::string & name, const r
     if (val.HasMember("OpeningBuildOrder"))
     {
         BOSS_ASSERT(val["OpeningBuildOrder"].IsString(), "OpeningBuildOrder should be a string");
-        _params.setOpeningBuildOrder(BOSSParameters::Instance().GetBuildOrder(val["OpeningBuildOrder"].GetString()));
+        _params.setOpeningBuildOrder(parameters.GetBuildOrder(val["OpeningBuildOrder"].GetString()));
     }
 
     if (val.HasMember("BestResponseParams"))
@@ -90,10 +89,10 @@ CombatSearchExperiment::CombatSearchExperiment(const std::string & name, const r
         BOSS_ASSERT(brVal.HasMember("EnemyBuildOrder"), "bestResponseParams must have 'enemyBuildOrder' string");
 
         BOSS_ASSERT(brVal.HasMember("EnemyState") && brVal["EnemyState"].IsString(), "bestResponseParams must have a 'EnemyState' string");
-        _params.setEnemyInitialState(BOSSParameters::Instance().GetState(brVal["EnemyState"].GetString()));
+        _params.setEnemyInitialState(parameters.GetState(brVal["EnemyState"].GetString()));
 
         BOSS_ASSERT(brVal.HasMember("EnemyBuildOrder") && brVal["EnemyBuildOrder"].IsString(), "BestResponseParams must have a 'EnemyBuildOrder' string");
-        _params.setEnemyBuildOrder(BOSSParameters::Instance().GetBuildOrder(brVal["EnemyBuildOrder"].GetString()));
+        _params.setEnemyBuildOrder(parameters.GetBuildOrder(brVal["EnemyBuildOrder"].GetString()));
     }
 }
 

@@ -47,17 +47,14 @@ class AIParameters
     
     GameState       getStateFromDesc(const SymStateDesc & desc);
 
-    AIParameters();
-
 public:
-
-    static AIParameters & Instance();
+	AIParameters();
 
     void                parseJSONValue(const rapidjson::Value & rootValue);
     void                parseJSONString(const std::string & jsonString);
     void                parseFile(const std::string & filename);
 
-    PlayerPtr           getPlayer(const size_t & player, const std::string & playerName);
+    PlayerPtr           getPlayer(const size_t & player, const std::string & playerName) const;
     GameState           getState(const std::string & stateName);
 
     const std::vector<std::string> & getPlayerNames() const;

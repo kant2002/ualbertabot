@@ -18,6 +18,8 @@
 using namespace UAlbertaBot;
 using namespace AKBot;
 
+SparCraft::AIParameters aiParameters;
+
 UAlbertaBot_Tournament::UAlbertaBot_Tournament(
 	BotConfiguration& configuration,
 	shared_ptr<BaseLocationManager> baseLocationManager,
@@ -71,13 +73,13 @@ void UAlbertaBot_Tournament::onStart()
 	// Initialize SparCraft, the combat simulation package
 	SparCraft::init();
 	auto configurationFile = ParseUtils::FindConfigurationLocation(_configuration.SparCraft.SparCraftConfigFile);
-	SparCraft::AIParameters::Instance().parseFile(configurationFile);
+	aiParameters.parseFile(configurationFile);
 
 	// Initialize BOSS, the Build Order Search System
 	BOSS::init();
 
 	// Set our BWAPI options here    
-	auto& bwapiOptions = _configuration.BWAPIOptions;
+	const auto& bwapiOptions = _configuration.BWAPIOptions;
 	BWAPI::Broodwar->setLocalSpeed(bwapiOptions.SetLocalSpeed);
 	BWAPI::Broodwar->setFrameSkip(bwapiOptions.SetFrameSkip);
 
@@ -91,7 +93,7 @@ void UAlbertaBot_Tournament::onStart()
 		BWAPI::Broodwar->enableFlag(BWAPI::Flag::UserInput);
 	}
 
-	auto& botInfoOptions = _configuration.BotInfo;
+	const auto& botInfoOptions = _configuration.BotInfo;
 	if (botInfoOptions.PrintInfoOnStart)
 	{
 		BWAPI::Broodwar->printf("Hello! I am %s, written by %s", botInfoOptions.BotName.c_str(), botInfoOptions.Authors.c_str());

@@ -1,10 +1,9 @@
 #include "BOSSPlotBuildOrders.h"
 #include "BuildOrderPlot.h"
-#include "BOSSParameters.h"
 
 using namespace BOSS;
 
-BOSSPlotBuildOrders::BOSSPlotBuildOrders(const std::string & name, const rapidjson::Value & val)
+BOSSPlotBuildOrders::BOSSPlotBuildOrders(const BOSSParameters& parameters, const std::string & name, const rapidjson::Value & val)
 {
     BOSS_ASSERT(val.HasMember("Scenarios") && val["Scenarios"].IsArray(), "Experiment has no Scenarios array");
     BOSS_ASSERT(val.HasMember("OutputDir") && val["OutputDir"].IsString(), "Experiment has no OutputFile string");
@@ -20,8 +19,8 @@ BOSSPlotBuildOrders::BOSSPlotBuildOrders(const std::string & name, const rapidjs
         BOSS_ASSERT(scenario.HasMember("State") && scenario["State"].IsString(), "Scenario has no 'state' string");
         BOSS_ASSERT(scenario.HasMember("BuildOrder") && scenario["BuildOrder"].IsString(), "Scenario has no 'buildOrder' string");
         
-        _states.push_back(BOSSParameters::Instance().GetState(scenario["State"].GetString()));
-        _buildOrders.push_back(BOSSParameters::Instance().GetBuildOrder(scenario["BuildOrder"].GetString()));
+        _states.push_back(parameters.GetState(scenario["State"].GetString()));
+        _buildOrders.push_back(parameters.GetBuildOrder(scenario["BuildOrder"].GetString()));
         _buildOrderNames.push_back(scenario["BuildOrder"].GetString());
     }
 }

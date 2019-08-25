@@ -11,16 +11,8 @@ AIParameters::AIParameters()
 {
 }
 
-AIParameters & AIParameters::Instance()
-{
-    static AIParameters params;
-    return params;
-}
-
 void AIParameters::parseJSONValue(const rapidjson::Value & rootValue)
 {  
-    Instance() = AIParameters();
-
     //SPARCRAFT_ASSERT(rootValue.HasMember("Move Iterators"),   "AIParameters: No 'Move Iterators' Options Found");
     SPARCRAFT_ASSERT(rootValue.HasMember("Engine"),  "AIParameters: No 'Engine' Options Found");
     SPARCRAFT_ASSERT(rootValue.HasMember("Players"), "AIParameters: No 'Players' Options Found");
@@ -376,11 +368,13 @@ GameState AIParameters::getStateFromDesc(const SymStateDesc & desc)
     return state;
 }
 
-PlayerPtr AIParameters::getPlayer(const size_t & player, const std::string & playerName)
+PlayerPtr AIParameters::getPlayer(const size_t & player, const std::string & playerName) const
 {
-    SPARCRAFT_ASSERT(_playerMap[player].find(playerName) != _playerMap[player].end(), "AIParameters::getPlayer Couldn't find player variable: %d %s", (int)_playerMap[player].size(), playerName.c_str());
+	const auto& item = _playerMap[player];
+    SPARCRAFT_ASSERT(item.find(playerName) != item.end(), "AIParameters::getPlayer Couldn't find player variable: %d %s", (int)item.size(), playerName.c_str());
 
-    return _playerMap[player][playerName]->clone();
+	const auto& playerPtr = item.at(playerName);
+    return playerPtr->clone();
 }
 
 void AIParameters::parseJSONString(const std::string & jsonString)

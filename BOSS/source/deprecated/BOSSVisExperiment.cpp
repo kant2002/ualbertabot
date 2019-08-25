@@ -1,7 +1,5 @@
 #include "BOSSVisExperiment.h"
 
-#include "GUI.h"
-
 using namespace BOSS;
 
 BOSSVisExperiment::BOSSVisExperiment()
@@ -12,7 +10,7 @@ BOSSVisExperiment::BOSSVisExperiment()
 
 }
 
-BOSSVisExperiment::BOSSVisExperiment(const rapidjson::Value & val, std::map< std::string, GameState > & stateMap, std::map< std::string, BuildOrder > & buildOrderMap)
+BOSSVisExperiment::BOSSVisExperiment(const GUI& gui, const rapidjson::Value & val, std::map< std::string, GameState > & stateMap, std::map< std::string, BuildOrder > & buildOrderMap)
     : _startTimes(val["scenarios"].Size(), std::vector<FrameCountType>())
     , _finishTimes(val["scenarios"].Size(), std::vector<FrameCountType>())
     , _nextActionIndexes(val["scenarios"].Size(), 0)
@@ -175,7 +173,7 @@ PositionType BOSSVisExperiment::DrawScenario(const Position & pos, const size_t 
     {
         const UnitCountType & numLarva = currentState.getHatcheryData().numLarva();
 
-        GUI::Instance().DrawActionType(Larva, completed, cwidth);
+        gui.DrawActionType(Larva, completed, cwidth);
         std::stringstream num; num << numLarva << "\n" << (Constants::ZERG_LARVA_TIMER-(currentState.getCurrentFrame() % Constants::ZERG_LARVA_TIMER));
         GUITools::DrawString(completed + Position(10, 20), num.str(), white);
         completed.add(cwidth, 0);
@@ -187,7 +185,7 @@ PositionType BOSSVisExperiment::DrawScenario(const Position & pos, const size_t 
 
         if (numCompleted > 0)
         {
-            GUI::Instance().DrawActionType(allActions[a], completed, cwidth);
+			gui.DrawActionType(allActions[a], completed, cwidth);
             std::stringstream num; num << numCompleted;
             GUITools::DrawString(completed + Position(10, 20), num.str(), white);
             completed.add(cwidth, 0);
@@ -201,7 +199,7 @@ PositionType BOSSVisExperiment::DrawScenario(const Position & pos, const size_t 
     for (size_t a(0); a < legalActions.size(); ++a)
     {
         const ActionType & action = legalActions[a];
-        GUI::Instance().DrawActionType(legalActions[a], legal, 32);
+		gui.DrawActionType(legalActions[a], legal, 32);
         legal.add(32, 0);
     }
 
@@ -241,7 +239,7 @@ PositionType BOSSVisExperiment::DrawScenario(const Position & pos, const size_t 
         }
     }
 
-    float maxWidth = (float)GUI::Instance().Width() - 430;
+    float maxWidth = (float)gui.Width() - 430;
     float maxFinishTime = 1;
 
     for (size_t i(0); i < _finishTimes.size(); ++i)
@@ -318,7 +316,7 @@ PositionType BOSSVisExperiment::DrawScenario(const Position & pos, const size_t 
             //GUITools::DrawString(topLeft - Position(-2,9), getTimeString(finishTimes[i]).c_str(), bred);
         }
 
-        GUI::Instance().DrawActionType(buildOrder[i], topLeft, boWidth);
+		gui.DrawActionType(buildOrder[i], topLeft, boWidth);
 
         std::string name = buildOrder[i].getName();
 #ifndef EMSCRIPTEN

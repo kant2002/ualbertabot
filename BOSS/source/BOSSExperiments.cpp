@@ -5,7 +5,7 @@
 
 using namespace BOSS;
 
-void Experiments::RunExperiments(const std::string & experimentFilename)
+void Experiments::RunExperiments(const BOSSParameters& parameters, const std::string & experimentFilename)
 {
     rapidjson::Document document;
     JSONTools::ParseJSONFile(document, experimentFilename);
@@ -27,11 +27,11 @@ void Experiments::RunExperiments(const std::string & experimentFilename)
 
             if (type == "CombatSearch")
             {
-                RunCombatExperiment(name, val);
+                RunCombatExperiment(parameters, name, val);
             }
             else if (type == "BuildOrderPlot")
             {
-                RunBuildOrderPlot(name, val);
+                RunBuildOrderPlot(parameters, name, val);
             }
             else
             {
@@ -43,14 +43,14 @@ void Experiments::RunExperiments(const std::string & experimentFilename)
     std::cout << "\n\n";
 }
 
-void Experiments::RunCombatExperiment(const std::string & name, const rapidjson::Value & val)
+void Experiments::RunCombatExperiment(const BOSSParameters& parameters, const std::string & name, const rapidjson::Value & val)
 {
-    CombatSearchExperiment exp(name, val);
+    CombatSearchExperiment exp(parameters, name, val);
     exp.run();
 }
 
-void Experiments::RunBuildOrderPlot(const std::string & name, const rapidjson::Value & val)
+void Experiments::RunBuildOrderPlot(const BOSSParameters& parameters, const std::string & name, const rapidjson::Value & val)
 {
-    BOSSPlotBuildOrders plot(name, val);
+    BOSSPlotBuildOrders plot(parameters, name, val);
     plot.doPlots();
 }

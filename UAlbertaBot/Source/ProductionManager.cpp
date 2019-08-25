@@ -443,7 +443,6 @@ void ProductionManager::create(BWAPI::Unit producer, BuildOrderItem & item)
     }
     else if (t.isUpgrade())
     {
-        //Logger::Instance().log("Produce Upgrade: " + t.getName() + "\n");
         producer->upgrade(t.getUpgradeType());
     }
     else

@@ -7,12 +7,6 @@ BOSSParameters::BOSSParameters()
 
 }
 
-BOSSParameters & BOSSParameters::Instance()
-{
-    static BOSSParameters params;
-    return params;
-}
-
 void BOSSParameters::ParseParameters(const std::string & configFile)
 {
     _configFile = configFile;
@@ -58,18 +52,18 @@ void BOSSParameters::ParseParameters(const std::string & configFile)
     }
 }
 
-const GameState & BOSSParameters::GetState(const std::string & key)
+const GameState & BOSSParameters::GetState(const std::string & key) const
 {
     BOSS_ASSERT(_stateMap.find(key) != _stateMap.end(), "Couldn't find state: %s", key.c_str());
 
-    return _stateMap[key];
+    return _stateMap.at(key);
 }
 
-const BuildOrder & BOSSParameters::GetBuildOrder(const std::string & key)
+const BuildOrder & BOSSParameters::GetBuildOrder(const std::string & key) const
 {
     BOSS_ASSERT(_buildOrderMap.find(key) != _buildOrderMap.end(), "Couldn't find build order: %s", key.c_str());
 
-    return _buildOrderMap[key];
+    return _buildOrderMap.at(key);
 }
 
 const BuildOrderSearchGoal & BOSSParameters::GetBuildOrderSearchGoalMap(const std::string & key)

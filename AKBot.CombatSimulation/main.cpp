@@ -31,6 +31,8 @@ BotSparCraftConfiguration sparcraftConfiguration;
 
 BWAPI::GameData rawGameData;
 
+SparCraft::AIParameters aiParameters;
+
 std::shared_ptr<AKBot::GameImpl> setupFakeGame()
 {
 	ZeroMemory(&rawGameData, sizeof(BWAPI::GameData));
@@ -557,10 +559,11 @@ SparCraftCombatEstimator getSparCraft(std::shared_ptr<AKBot::GameImpl> gameImpl)
 	SparCraft::init();
 	auto path = std::experimental::filesystem::current_path();
 	auto sparcraftConfigFile = path.concat("/SparCraft_Config.txt").string();
-	SparCraft::AIParameters::Instance().parseFile(sparcraftConfigFile);
+	aiParameters.parseFile(sparcraftConfigFile);
 	return SparCraftCombatEstimator(
 		opponentView,
 		logger,
+		aiParameters,
 		sparcraftConfiguration,
 		configuration);
 }

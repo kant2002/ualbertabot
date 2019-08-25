@@ -7,10 +7,11 @@ using namespace SparCraft;
 int main(int argc, char* argv[])
 {
     SparCraft::init();
-    AIParameters::Instance().parseFile("SparCraft_Config.txt");
+	AIParameters parameters;
+	parameters.parseFile("SparCraft_Config.txt");
 
     printf("Running Benchmarks\n");
-    Benchmarks::DoBenchmarks("SparCraft_Config.txt");
+    Benchmarks::DoBenchmarks(parameters, "SparCraft_Config.txt");
 
     return 0;
 }

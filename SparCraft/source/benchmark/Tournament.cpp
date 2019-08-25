@@ -8,9 +8,10 @@
 
 using namespace SparCraft;
 
-Tournament::Tournament()
+Tournament::Tournament(const AIParameters& aiParameters)
     : _totalGamesPlayed(0)
     , _updateIntervalSec(0)
+	, _aiParameters(aiParameters)
 {
     
 }
@@ -70,10 +71,10 @@ void Tournament::run(const rapidjson::Value & tournamentValue, const rapidjson::
                     continue;
                 }
 
-                PlayerPtr w1 = AIParameters::Instance().getPlayer(Players::Player_One, _players[p1]);
-                PlayerPtr b1 = AIParameters::Instance().getPlayer(Players::Player_Two, _players[p2]);
-                PlayerPtr w2 = AIParameters::Instance().getPlayer(Players::Player_One, _players[p2]);
-                PlayerPtr b2 = AIParameters::Instance().getPlayer(Players::Player_Two, _players[p1]);
+                PlayerPtr w1 = _aiParameters.getPlayer(Players::Player_One, _players[p1]);
+                PlayerPtr b1 = _aiParameters.getPlayer(Players::Player_Two, _players[p2]);
+                PlayerPtr w2 = _aiParameters.getPlayer(Players::Player_One, _players[p2]);
+                PlayerPtr b2 = _aiParameters.getPlayer(Players::Player_Two, _players[p1]);
 
                 TournamentGame g1(state, _players[p1], w1, _players[p2], b1);
                 TournamentGame g2(state, _players[p2], w2, _players[p1], b2);

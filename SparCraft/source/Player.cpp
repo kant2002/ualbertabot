@@ -41,7 +41,7 @@ void Player::setName(const std::string & name)
     _name = name; 
 }
 
-PlayerPtr Player::clone() 
+PlayerPtr Player::clone() const
 { 
     return PlayerPtr(new Player(*this));
 }

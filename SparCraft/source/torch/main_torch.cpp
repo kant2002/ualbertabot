@@ -9,13 +9,14 @@ int main(int argc, char *argv[])
 
     try
     {
+		AIParameters aiParameters;
         if (argc == 2)
         {
-            AIParameters::Instance().parseFile(argv[1]);
+			aiParameters.parseFile(argv[1]);
         }
         else
         {
-            AIParameters::Instance().parseFile("SparCraft_Config.txt");
+			aiParameters.parseFile("SparCraft_Config.txt");
         }
 
         std::string requestType;
@@ -23,11 +24,11 @@ int main(int argc, char *argv[])
 
         if (requestType == "Move")
         {
-            TorchTools::PrintMoveFromFrameStream(std::cin);
+            TorchTools::PrintMoveFromFrameStream(aiParameters, std::cin);
         }
         else if (requestType == "Value")
         {
-            TorchTools::PrintStateValueFromFrameStream(std::cin);
+            TorchTools::PrintStateValueFromFrameStream(aiParameters, std::cin);
         }
     }
     catch (SparCraftException e)

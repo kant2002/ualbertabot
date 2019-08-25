@@ -43,6 +43,7 @@ public:
 	CombatSimulation(
 		shared_ptr<AKBot::OpponentView> opponentView,
 		shared_ptr<AKBot::Logger> logger,
+		const SparCraft::AIParameters& aiParameters,
 		const BotSparCraftConfiguration& sparcraftConfiguration,
 		const BotMicroConfiguration& microConfiguration);
 

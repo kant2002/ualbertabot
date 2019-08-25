@@ -41,10 +41,11 @@ int main(int argc, char *argv[])
     BOSS::init();
 
     // Read in the config parameters that will be used for experiments
-    BOSS::BOSSParameters::Instance().ParseParameters("BOSS_Config.txt");
+	BOSS::BOSSParameters parameters;
+	parameters.ParseParameters("BOSS_Config.txt");
     
     // Run the experiments
-    BOSS::Experiments::RunExperiments("BOSS_Config.txt");
+    BOSS::Experiments::RunExperiments(parameters, "BOSS_Config.txt");
     
     return 0;
 }

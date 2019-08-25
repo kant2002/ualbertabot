@@ -6,13 +6,13 @@ using namespace UAlbertaBot;
 
 class NullDebugInfoProvider : public AKBot::CombatEstimatorDebugProvider {
 public:
-	void printDebugInformation(BWAPI::Position simulationCenter) override {}
+	void printDebugInformation(BWAPI::Position simulationCenter) noexcept override {}
 };
 
 class SparCraftCombatEstimatorDebugProvider : public AKBot::CombatEstimatorDebugProvider {
 	AKBot::SparCraftCombatEstimator &_estimator;
 public:
-	SparCraftCombatEstimatorDebugProvider(AKBot::SparCraftCombatEstimator &estimator): _estimator(estimator)
+	SparCraftCombatEstimatorDebugProvider(AKBot::SparCraftCombatEstimator &estimator) noexcept : _estimator(estimator)
 	{
 	};
 	void printDebugInformation(BWAPI::Position simulationCenter) override
@@ -37,7 +37,7 @@ public:
 class FAPCombatEstimatorDebugProvider : public AKBot::CombatEstimatorDebugProvider {
 	AKBot::FAPCombatEstimator &_estimator;
 public:
-	FAPCombatEstimatorDebugProvider(AKBot::FAPCombatEstimator &estimator) : _estimator(estimator)
+	FAPCombatEstimatorDebugProvider(AKBot::FAPCombatEstimator &estimator) noexcept: _estimator(estimator)
 	{
 	};
 	void printDebugInformation(BWAPI::Position simulationCenter) override
@@ -45,17 +45,17 @@ public:
 		BWAPI::Broodwar->drawCircleMap(simulationCenter.x, simulationCenter.y, 10, BWAPI::Colors::Red, true);
 		std::stringstream ss1;
 		ss1 << "Units score:\n";
-		auto unitsScore = _estimator.playerScoresUnits();
+		const auto unitsScore = _estimator.playerScoresUnits();
 		ss1 << "Me: " << unitsScore.first << " Enemy: " << unitsScore.second << "\n\n";
 
 		std::stringstream ss2;
 		ss2 << "Buildings score:\n";
-		auto buildingsScore = _estimator.playerScoresBuildings();
+		const auto buildingsScore = _estimator.playerScoresBuildings();
 		ss2 << "Me: " << buildingsScore.first << " Enemy: " << buildingsScore.second << "\n\n";
 
 		std::stringstream ss3;
 		ss3 << "Total score:\n";
-		auto totalScore = _estimator.playerScores();
+		const auto totalScore = _estimator.playerScores();
 		ss3 << "Me: " << totalScore.first << " Enemy: " << totalScore.second << "\n\n";
 
 		BWAPI::Broodwar->drawTextScreen(150, 200, "%s", ss1.str().c_str());
@@ -84,12 +84,18 @@ const AKBot::CombatSimulationEntry & UAlbertaBot::CombatSimulation::getCurrentSi
 CombatSimulation::CombatSimulation(
 	shared_ptr<AKBot::OpponentView> opponentView,
 	std::shared_ptr<AKBot::Logger> logger,
+	const SparCraft::AIParameters& aiParameters,
 	const BotSparCraftConfiguration& sparcraftConfiguration,
 	const BotMicroConfiguration& microConfiguration)
 	: _microConfiguration(microConfiguration)
 {
 	AKBot::CombatSimulationEntry sparcraftEntry;
-	sparcraftEntry.estimator = make_unique<AKBot::SparCraftCombatEstimator>(opponentView, logger, sparcraftConfiguration, microConfiguration);
+	sparcraftEntry.estimator = make_unique<AKBot::SparCraftCombatEstimator>(
+		opponentView,
+		logger,
+		aiParameters,
+		sparcraftConfiguration,
+		microConfiguration);
 	sparcraftEntry.debugProvider = make_unique<SparCraftCombatEstimatorDebugProvider>(
 		reinterpret_cast<AKBot::SparCraftCombatEstimator&>(*sparcraftEntry.estimator.get()));
 	registry.insert(std::make_pair("sparcraft", std::move(sparcraftEntry)));

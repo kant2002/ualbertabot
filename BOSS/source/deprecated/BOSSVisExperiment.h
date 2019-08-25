@@ -5,6 +5,7 @@
 #include "JSONTools.h"
 #include "rapidjson/rapidjson.h"
 #include "rapidjson/document.h"
+#include "GUI.h"
 
 namespace BOSS
 {
@@ -32,7 +33,7 @@ class BOSSVisExperiment
 public:
 
     BOSSVisExperiment();
-    BOSSVisExperiment(const rapidjson::Value & experimentVal, std::map< std::string, GameState > & stateMap, std::map< std::string, BuildOrder > & buildOrderMap);
+    BOSSVisExperiment(const GUI& gui, const rapidjson::Value & experimentVal, std::map< std::string, GameState > & stateMap, std::map< std::string, BuildOrder > & buildOrderMap);
 
     void onFrame();
 

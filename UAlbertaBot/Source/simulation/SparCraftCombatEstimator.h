@@ -27,6 +27,7 @@ namespace AKBot
 		std::shared_ptr<AKBot::Logger> _logger;
 		const BotSparCraftConfiguration& _sparcraftConfiguration;
 		const BotMicroConfiguration& _microConfiguration;
+		const SparCraft::AIParameters& _aiParameters;
 
 		void setCombatUnits(
 			const std::vector<BWAPI::Unit> ourCombatUnits,
@@ -43,6 +44,7 @@ namespace AKBot
 		SparCraftCombatEstimator(
 			shared_ptr<AKBot::OpponentView> opponentView,
 			shared_ptr<AKBot::Logger> logger,
+			const SparCraft::AIParameters& aiParameters,
 			const BotSparCraftConfiguration& sparcraftConfiguration,
 			const BotMicroConfiguration& microConfiguration);
 		bool isWinPredicted(

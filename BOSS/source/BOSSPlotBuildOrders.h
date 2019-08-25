@@ -4,6 +4,7 @@
 #include "JSONTools.h"
 #include "rapidjson/rapidjson.h"
 #include "rapidjson/document.h"
+#include "BOSSParameters.h"
 
 namespace BOSS
 {
@@ -17,7 +18,7 @@ class BOSSPlotBuildOrders
 
 public:
 
-    BOSSPlotBuildOrders(const std::string & name, const rapidjson::Value & experimentVal);
+    BOSSPlotBuildOrders(const BOSSParameters& parameters, const std::string & name, const rapidjson::Value & experimentVal);
     
     void doPlots();
 };

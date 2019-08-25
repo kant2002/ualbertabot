@@ -9,9 +9,9 @@ namespace SparCraft
 
 namespace Benchmarks
 {
-    void DoBenchmarks(const std::string & filename);
+    void DoBenchmarks(const AIParameters& aiParameters, const std::string & filename);
 
-    void DoTournamentBenchmark(const rapidjson::Value & value, const rapidjson::Value & rootValue);
+    void DoTournamentBenchmark(const AIParameters& aiParameters, const rapidjson::Value & value, const rapidjson::Value & rootValue);
     //void DoPlayerBenchmark(const PlayerBenchmark & benchmark);
 }
 

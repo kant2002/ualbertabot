@@ -39,12 +39,6 @@ GUI::GUI()
     }
 }
 
-GUI & GUI::Instance()
-{
-    static GUI g;
-    return g;
-}
-
 GUI::~GUI()
 {
     SDL_Quit();
@@ -220,7 +214,7 @@ void GUI::Render()
     currentFrame++;
 }
 
-void GUI::DrawActionType(const ActionType & type, const Position & topLeft, const size_t & width)
+void GUI::DrawActionType(const ActionType & type, const Position & topLeft, const size_t & width) const
 {
     int textureNumber = getTextureNumber(type);
     float ratio = (float)width / textureSizes[textureNumber].x();
@@ -230,12 +224,12 @@ void GUI::DrawActionType(const ActionType & type, const Position & topLeft, cons
     GUITools::DrawTexturedRect(topLeft, bottomRight, textureNumber, white);
 }
 
-int GUI::Width()
+int GUI::Width() const
 {
     return windowSizeX;
 }
 
-int GUI::Height()
+int GUI::Height() const
 {
     return windowSizeY;
 }

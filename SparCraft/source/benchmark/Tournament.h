@@ -9,6 +9,7 @@ namespace SparCraft
  
 class Tournament
 {
+	const AIParameters& _aiParameters;
     std::string                         _name;
     std::string                         _type;
     std::string                         _date;
@@ -43,7 +44,7 @@ class Tournament
 
 public:
 
-    Tournament();
+    Tournament(const AIParameters& aiParameters);
     void run(const rapidjson::Value & tournamentValue, const rapidjson::Value & rootValue);
 
 };

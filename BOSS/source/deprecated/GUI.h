@@ -76,11 +76,10 @@ public:
     static const int            TextureASCIIOffset;
     static const int            TextureFont;
 
-    static GUI & Instance();
     ~GUI();
 
-    int Width();
-    int Height();
+    int Width() const;
+    int Height() const;
     void OnStart();
     void OnFrame();
     bool isStarted() const;
@@ -88,6 +87,6 @@ public:
 
     void SetVisExperiment(BOSSVisExperiment & exp);
 
-    void DrawActionType(const ActionType & type, const Position & tl, const size_t & width);
+    void DrawActionType(const ActionType & type, const Position & tl, const size_t & width) const;
 };
 }

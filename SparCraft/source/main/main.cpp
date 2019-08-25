@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
 	auto sparcraftConfigFile = sparcraftConfigPath.string();
     SparCraft::init();
-	auto& parameters = AIParameters::Instance();
+	AIParameters parameters;
 	parameters.parseFile(sparcraftConfigFile);
 
     SparCraftExperiment exp;

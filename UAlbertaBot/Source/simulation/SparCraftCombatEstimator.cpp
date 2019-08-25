@@ -7,10 +7,12 @@ using namespace UAlbertaBot;
 AKBot::SparCraftCombatEstimator::SparCraftCombatEstimator(
 	shared_ptr<AKBot::OpponentView> opponentView,
 	std::shared_ptr<AKBot::Logger> logger,
+	const SparCraft::AIParameters& aiParameters,
 	const BotSparCraftConfiguration& sparcraftConfiguration,
 	const BotMicroConfiguration& microConfiguration)
 	: _opponentView(opponentView)
 	, _logger(logger)
+	, _aiParameters(aiParameters)
 	, _sparcraftConfiguration(sparcraftConfiguration)
 	, _microConfiguration(microConfiguration)
 {
@@ -184,9 +186,8 @@ double AKBot::SparCraftCombatEstimator::simulateCombat()
 		SparCraft::PlayerPtr selfNOK(new SparCraft::Player_AttackClosest(selfID));
 		SparCraft::PlayerPtr enemyNOK(new SparCraft::Player_AttackClosest(enemyID));
 
-		auto& aiParameters = SparCraft::AIParameters::Instance();
-		SparCraft::PlayerPtr p1 = aiParameters.getPlayer(selfID, _sparcraftConfiguration.CombatSimPlayerName);
-		SparCraft::PlayerPtr p2 = aiParameters.getPlayer(enemyID, _sparcraftConfiguration.CombatSimPlayerName);
+		SparCraft::PlayerPtr p1 = _aiParameters.getPlayer(selfID, _sparcraftConfiguration.CombatSimPlayerName);
+		SparCraft::PlayerPtr p2 = _aiParameters.getPlayer(enemyID, _sparcraftConfiguration.CombatSimPlayerName);
 
 		SparCraft::Game game(originalState, p1, p2, _microConfiguration.CombatEstimationDepth);
 
