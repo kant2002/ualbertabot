@@ -39,11 +39,11 @@ namespace AKBot
 		std::pair<FAPPlayerState*, FAPPlayerState*> getState() {
 			return fap.getState();
 		}
-		std::pair<double, double> playerScores() const { return finalScores; }
+		std::pair<double, double> playerScores() const noexcept { return finalScores; }
 		std::pair<int, int> playerScoresUnits() const { return fap.playerScoresUnits(); }
 		std::pair<int, int> playerScoresBuildings() const { return fap.playerScoresBuildings(); }
 
-		std::pair<double, double> getInitialScores() const { return initialScores; }
+		std::pair<double, double> getInitialScores() const noexcept { return initialScores; }
 	};
 	
 	double defaultScoreFunction(const FAPCombatEstimator& estimator);

@@ -40,7 +40,7 @@ public:
 	BaseLocation(std::shared_ptr<AKBot::OpponentView> opponentView, shared_ptr<MapTools> mapTools, int baseID, const std::vector<BWAPI::Unit> & resources);
     
 	/* Get id of the base location */
-	int getId() const { return _baseID; };
+	int getId() const noexcept { return _baseID; };
 	AKBot::Rect getRecourceBounds() const { return AKBot::Rect(_left, _top, _right, _bottom); };
     int getGroundTileDistance(const BWAPI::Position & pos) const;
     bool isStartLocation() const;

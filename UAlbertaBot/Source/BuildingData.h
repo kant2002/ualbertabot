@@ -27,7 +27,7 @@ public:
 	bool                    buildCommandGiven;
 	bool                    underConstruction;
 
-	Building() 
+	Building() noexcept
 		: desiredPosition   (0,0)
         , finalPosition     (BWAPI::TilePositions::None)
         , position          (0,0)
@@ -57,7 +57,7 @@ public:
     {}
 
 	// equals operator
-	bool operator==(const Building & b) 
+	bool operator==(const Building & b) noexcept
     {
 		// buildings are equal if their worker unit or building unit are equal
 		return (b.buildingUnit == buildingUnit) || (b.builderUnit == builderUnit);

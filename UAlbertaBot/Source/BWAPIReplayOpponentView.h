@@ -16,7 +16,7 @@ namespace AKBot
 		* Initialize new instance of the @see BWAPIReplayOpponentView class
 		* @param game BWAPI game
 		*/
-		BWAPIReplayOpponentView(BWAPI::Game* game);
+		explicit BWAPIReplayOpponentView(BWAPI::Game* game);
 		/*
 		Returns bot's player
 		*/

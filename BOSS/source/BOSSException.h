@@ -12,7 +12,7 @@ class BOSSException : public std::exception
 public :
 
     //BOSSException(std::string ss, const GameState * state);
-    BOSSException(std::string ss);
+    explicit BOSSException(const std::string& ss);
 
     ~BOSSException() throw ();
     const char* what() const throw();

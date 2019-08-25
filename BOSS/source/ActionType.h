@@ -17,9 +17,9 @@ public:
     ActionType();
     ActionType(const RaceID & race, const ActionID & id);
     ActionType(const ActionType & type);
-    ActionType(const BWAPI::UnitType & type);
-    ActionType(const BWAPI::UpgradeType & type);
-    ActionType(const BWAPI::TechType & type);
+    explicit ActionType(const BWAPI::UnitType & type);
+    explicit ActionType(const BWAPI::UpgradeType & type);
+    explicit ActionType(const BWAPI::TechType & type);
 
     ActionType & operator = (const ActionType & rhs);
 

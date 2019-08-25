@@ -12,7 +12,7 @@ namespace GraphViz
 	public:
 		std::string prop;
 		std::string value;
-		Property(std::string p, std::string val) : prop(p), value(val) { }	
+		Property(const std::string& p, const std::string& val) : prop(p), value(val) { }	
 		void print(std::ofstream & out) { out << prop << "=\"" << value << "\", "; }
 	};
 
@@ -21,7 +21,7 @@ namespace GraphViz
 	public:
 		std::vector<Property> props;
 		std::string name;
-		Node(std::string n) : name(n) {}
+		explicit Node(const std::string& n) : name(n) {}
 		Node() {}
 	
 		void set(std::string p, std::string v) { props.push_back(Property(p,v)); }
@@ -39,7 +39,7 @@ namespace GraphViz
 		std::pair<std::string, std::string> nodes;
 		std::vector<Property> props;
 
-		Edge(std::string n1, std::string n2) : nodes(n1, n2) {}
+		Edge(const std::string& n1, const std::string& n2) : nodes(n1, n2) {}
 		Edge(Node & n1, Node & n2) : nodes(n1.name, n2.name) {}
 		void set(std::string p, std::string v) { props.push_back(Property(p,v)); }
 		void print(std::ofstream & out)
@@ -59,7 +59,7 @@ namespace GraphViz
 
 	public:
 
-		Graph(std::string n) : name(n) {}
+		explicit Graph(const std::string& n) : name(n) {}
 		void set(std::string p, std::string v) { props.push_back(Property(p,v)); }
 		void addNode(Node & n) { nodes.push_back(n); }
 		void addEdge(Edge & e) { edges.push_back(e); }

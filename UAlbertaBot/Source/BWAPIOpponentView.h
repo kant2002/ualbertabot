@@ -15,20 +15,20 @@ namespace AKBot
 		* Initialize new instance of the @see BWAPIOpponentView class
 		* @param game BWAPI game
 		*/
-		BWAPIOpponentView(BWAPI::Game* game);
+		explicit BWAPIOpponentView(BWAPI::Game* game) noexcept;
 		/*
 		Returns bot's player
 		*/
-		virtual BWAPI::Player self() const override;
+		BWAPI::Player self() const override;
 
 		/*
 		Default enemy for current player
 		*/
-		virtual BWAPI::Player defaultEnemy() const override;
+		BWAPI::Player defaultEnemy() const override;
 
 		/*
 		Returns set of opponents to the given bot.
 		*/
-		virtual const BWAPI::Playerset& enemies() const override;
+		const BWAPI::Playerset& enemies() const override;
 	};
 }

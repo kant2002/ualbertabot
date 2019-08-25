@@ -13,7 +13,7 @@ namespace AKBot
 	{
 		vector<shared_ptr<DebugInfoProvider>> _debugProviders;
 	public:
-		GameDebug(vector<shared_ptr<DebugInfoProvider>> debugProviders);
+		explicit GameDebug(vector<shared_ptr<DebugInfoProvider>> debugProviders);
 		/*
 		 Draw debug information on the screen canvas.
 		*/

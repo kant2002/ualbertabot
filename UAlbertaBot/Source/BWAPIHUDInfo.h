@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		BWAPI::Game* _game;
 	public:
-		BWAPIHUDInfo(BWAPI::Game* game);
+		explicit BWAPIHUDInfo(BWAPI::Game* game);
 		BWAPI::Position getMousePosition() const override;
 		BWAPI::Position getScreenPosition() const override;
 		bool getMouseState(BWAPI::MouseButton button) const override;

@@ -119,7 +119,7 @@ void GameState::addUnits(const BWAPI::Unitset& units)
 							set = true;
 
 							// we now need to add this to units in progress, since it won't be detected below as an actual unit in progress
-							_units.addActionInProgress(trainType, _currentFrame + trainType.buildTime(), false);
+							_units.addActionInProgress(constructing, _currentFrame + trainType.buildTime(), false);
 						}
 					}
 

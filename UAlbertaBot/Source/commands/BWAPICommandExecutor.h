@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		BWAPI::Game* _game;
 	public:
-		BWAPICommandExecutor(BWAPI::Game* game);
+		explicit BWAPICommandExecutor(BWAPI::Game* game);
 		void onCommand(const std::string& command) override;
 	};
 }

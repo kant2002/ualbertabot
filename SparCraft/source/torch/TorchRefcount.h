@@ -16,16 +16,15 @@ private:
 	std::atomic_int refs;
 
 public:
-	RefCounted() {
-		refs = 1;
+	RefCounted() noexcept : refs(1) {
 	}
 	// Destructor needs to be virtual for delete this to work correctly.
 	virtual ~RefCounted() {}
 
-	void incref() {
+	void incref() noexcept {
 		refs++;
 	}
-	void decref() {
+	void decref() noexcept {
 		if (--refs == 0) delete this;
 	}
 };

@@ -12,8 +12,8 @@ namespace AKBot
 		std::vector<BWAPI::TilePosition> _locations;
 		ExplorationCheck _explorationCheck;
 	public:
-		// Create new isntance of ExplorerManager with function performing check of tiles for exploration status.
-		ExplorerManager(ExplorationCheck explorationCheck);
+		// Create new instance of ExplorerManager with function performing check of tiles for exploration status.
+		explicit ExplorerManager(ExplorationCheck explorationCheck);
 
 		// Adds base location for exploration by specify position of the base.
 		// This like regular location, but we want to add couple more points to check,

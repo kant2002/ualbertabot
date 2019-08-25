@@ -84,7 +84,7 @@ class Frame : public RefCounted {
     }
 
     void filter(int32_t x, int32_t y, Frame& o) const {
-        auto inRadius = [x, y](int32_t ux, int32_t uy) {
+        const auto inRadius = [x, y](int32_t ux, int32_t uy) noexcept {
             return (x/8-ux)*(x/8-ux) + (y/8-uy)*(y/8-uy) <= 20 * 4 * 20 * 4;
         };
 
@@ -109,29 +109,32 @@ class Frame : public RefCounted {
             assert (units.count(player.first) != 0);
 
             // Build dictionary of uid -> position in current frame unit vector
+			auto& player_units = units[player.first];
             std::unordered_map<int32_t, int32_t> idx;
-            for(unsigned i = 0; i < units[player.first].size(); i++) {
-                idx[units[player.first][i].id] = i;
+            for(size_t i = 0; i < player_units.size(); i++) {
+				const auto& unit_id = player_units[i].id;
+                idx[unit_id] = i;
             }
+
             // Iterate over units in next frame
             for(auto& unit : player.second) {
                 if (idx.count(unit.id) == 0) {
                     // Unit wasn't in current frame, add it
                     units[player.first].push_back(unit);
                 } else {
-                    int32_t i = idx[unit.id];
+                    const int32_t i = idx[unit.id];
                     // Take unit state from next frame but accumulate orders
                     // so as to have a vector of all the orders taken
                     std::vector<Order> ords
-                        = std::move(units[player.first][i].orders);
+                        = std::move(player_units[i].orders);
                     ords.reserve(ords.size() + unit.orders.size());
                     for (auto& ord : unit.orders) {
                         if (ords.empty() || !(ord == ords.back())) {
                             ords.push_back(ord);
                         }
                     }
-                    units[player.first][i] = unit;
-                    units[player.first][i].orders = std::move(ords);
+                    player_units[i] = unit;
+                    player_units[i].orders = std::move(ords);
                 }
             }
         }

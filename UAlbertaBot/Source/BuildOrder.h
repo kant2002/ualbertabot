@@ -14,7 +14,7 @@ class BuildOrder
 public:
 
     BuildOrder();
-    BuildOrder(const BWAPI::Race & race);
+    explicit BuildOrder(const BWAPI::Race & race);
     BuildOrder(const BWAPI::Race & race, const std::vector<MetaType> & metaVector);
 
     void add(const MetaType & t);

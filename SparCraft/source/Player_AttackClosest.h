@@ -20,7 +20,7 @@ namespace SparCraft
 class SparCraft::Player_AttackClosest : public SparCraft::Player
 {
 public:
-	Player_AttackClosest (const size_t & playerID);
+	explicit Player_AttackClosest (const size_t & playerID);
 	void getMove(const GameState & state, Move & move);
     virtual PlayerPtr clone();
 };

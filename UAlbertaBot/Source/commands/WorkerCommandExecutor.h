@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		BotDebugConfiguration& _debugConfiguration;
 	public:
-		WorkerCommandExecutor(BotDebugConfiguration& debugConfiguration);
+		explicit WorkerCommandExecutor(BotDebugConfiguration& debugConfiguration);
 		void onCommand(const std::string& command) override;
 		bool isSupported(const std::string& command) const override;
 	};
