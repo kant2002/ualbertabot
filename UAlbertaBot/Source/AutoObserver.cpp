@@ -3,7 +3,7 @@
 
 using namespace UAlbertaBot;
 
-AutoObserver::AutoObserver(shared_ptr<AKBot::OpponentView> opponentView, shared_ptr<WorkerManager> workerManager)
+AutoObserver::AutoObserver(shared_ptr<AKBot::OpponentView> opponentView, shared_ptr<WorkerManager> workerManager) noexcept
 	: _opponentView(opponentView)
 	, _workerManager(workerManager)
 	, _unitFollowFrames(0)

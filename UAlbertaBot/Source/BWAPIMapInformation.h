@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		BWAPI::Game* _game;
 	public:
-		BWAPIMapInformation(BWAPI::Game* game);
+		explicit BWAPIMapInformation(BWAPI::Game* game);
 		int getWidth() const override;
 		int getHeight() const override;
 		bool isWalkable(int x, int y) const override;

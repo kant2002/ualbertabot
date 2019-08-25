@@ -18,7 +18,7 @@ class AutoObserver
 
 public:
 
-    AutoObserver(shared_ptr<AKBot::OpponentView> opponentView, shared_ptr<WorkerManager> workerManager);
+    AutoObserver(shared_ptr<AKBot::OpponentView> opponentView, shared_ptr<WorkerManager> workerManager) noexcept;
     void onFrame(int currentFrame);
 };
 

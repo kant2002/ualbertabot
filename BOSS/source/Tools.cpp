@@ -12,7 +12,7 @@ BuildOrder Tools::GetOptimizedNaiveBuildOrderOld(const GameState & state, const 
     FrameCountType minCompletionTime = bestBuildOrder.getCompletionTime(state);
     UnitCountType bestNumWorkers = bestBuildOrder.getTypeCount(ActionTypes::GetWorker(state.getRace()));
 
-    for (UnitCountType numWorkers(8); numWorkers < 27; ++numWorkers)
+    for (UnitCountType numWorkers = 8; numWorkers < 27; ++numWorkers)
     {
         BuildOrder buildOrder = Tools::GetNaiveBuildOrderAddWorkersOld(state, goal, numWorkers);
         FrameCountType completionTime = buildOrder.getCompletionTime(state);
@@ -246,7 +246,7 @@ BuildOrder Tools::GetNaiveBuildOrderAddWorkersOld(const GameState & state, const
 				currentState.doAction(supplyProvider);
 				continue;
 			}
-			catch (BOSSException e)
+			catch (const BOSSException& e)
 			{
 				break;
 			}

@@ -2,7 +2,7 @@
 
 using namespace BOSS;
 
-BOSSException::BOSSException(std::string ss) 
+BOSSException::BOSSException(const std::string& ss) 
     : _s(ss) 
     , _hasState(false)
 {

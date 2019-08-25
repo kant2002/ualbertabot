@@ -39,7 +39,7 @@ add_executable(SparCraft_main
 	source/TutorialCode.cpp
 )
 
-find_package(sdl2 REQUIRED)
+find_package(sdl2 CONFIG REQUIRED)
 #find_package(sdl2-image REQUIRED)
 target_link_libraries(SparCraft_main PRIVATE SDL2::SDL2 SDL2::SDL2main SparCraft SDL2_image opengl32)
 

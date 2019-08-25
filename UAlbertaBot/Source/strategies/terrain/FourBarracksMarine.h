@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		BWAPI::Player _self;
 	public:
-		FourBarracksMarine(BWAPI::Player self);
+		explicit FourBarracksMarine(BWAPI::Player self);
 		void getBuildOrderGoal(MetaPairVector& goal, int currentFrame) const final;
 	};
 }

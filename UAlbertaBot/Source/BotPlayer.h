@@ -11,7 +11,7 @@ namespace AKBot
 	{
 		shared_ptr<BotModule> m;
 	public:
-		BotPlayer(shared_ptr<BotModule> _m) : m(std::move(_m)) {}
+		explicit BotPlayer(shared_ptr<BotModule> _m) : m(std::move(_m)) {}
 
 		shared_ptr<BotModule> getBot() { return m; }
 

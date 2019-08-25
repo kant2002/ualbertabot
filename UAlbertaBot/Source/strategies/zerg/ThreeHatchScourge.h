@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		BWAPI::Player _self;
 	public:
-		ThreeHatchScourge(BWAPI::Player self);
+		explicit ThreeHatchScourge(BWAPI::Player self);
 		void getBuildOrderGoal(MetaPairVector& goal, int currentFrame) const final;
 	};
 }

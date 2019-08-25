@@ -32,7 +32,7 @@ struct UnitInfo
 
     }
 
-	UnitInfo(BWAPI::Unit unit)
+	explicit UnitInfo(BWAPI::Unit unit)
 		: unitID(unit->getID())
 		, lastHealth(unit->getHitPoints())
 		, lastShields(unit->getShields())

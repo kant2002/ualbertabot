@@ -33,7 +33,7 @@ public:
     // constructor which sets a completely walkable map
     Map(const size_t & bottomRightBuildTileX, const size_t & bottomRightBuildTileY);
 
-    Map(BWAPI::GameWrapper & game);
+    explicit Map(BWAPI::GameWrapper & game);
 	
     const size_t getPixelWidth() const;
     const size_t getPixelHeight() const;

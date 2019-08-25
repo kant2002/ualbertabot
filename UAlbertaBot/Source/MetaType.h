@@ -26,10 +26,10 @@ class MetaType
 public:
 
 	MetaType ();
-    MetaType (const std::string & name);
-	MetaType (BWAPI::UnitType t);
-	MetaType (BWAPI::TechType t);
-	MetaType (BWAPI::UpgradeType t);
+    explicit MetaType (const std::string & name);
+	explicit MetaType (BWAPI::UnitType t);
+	explicit MetaType (BWAPI::TechType t);
+	explicit MetaType (BWAPI::UpgradeType t);
 
 	bool    isUnit()		const;
 	bool    isTech()		const;

@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		BWAPI::Player _self;
 	public:
-		ProtossMiddleGame(BWAPI::Player self);
+		explicit ProtossMiddleGame(BWAPI::Player self);
 		void getBuildOrderGoal(MetaPairVector& goal, int currentFrame) const final;
 	};
 }

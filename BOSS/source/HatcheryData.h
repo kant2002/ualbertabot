@@ -19,7 +19,7 @@ class Hatchery
 	
 public:
 	
-	Hatchery(const UnitCountType & numLarva);
+	explicit Hatchery(const UnitCountType & numLarva);
 	Hatchery();
 
        

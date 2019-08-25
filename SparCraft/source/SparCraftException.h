@@ -11,7 +11,7 @@ class SparCraftException : public std::exception
 public :
 
     SparCraftException();
-    SparCraftException(std::string ss);
+    explicit SparCraftException(const std::string& ss);
 
     ~SparCraftException() throw ();
     const char* what() const throw();

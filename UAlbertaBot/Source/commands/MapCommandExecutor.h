@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		UAlbertaBot::MapTools& _map;
 	public:
-		MapCommandExecutor(UAlbertaBot::MapTools& map);
+		explicit MapCommandExecutor(UAlbertaBot::MapTools& map);
 		void onCommand(const std::string& command) override;
 		bool isSupported(const std::string& command) const override;
 	};

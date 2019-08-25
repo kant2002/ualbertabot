@@ -397,12 +397,12 @@ BWAPI::Unit WorkerData::getMineralToMine(BWAPI::Unit worker)
     // get the depot associated with this unit
     BWAPI::Unit depot = getWorkerDepot(worker);
     BWAPI::Unit bestMineral = nullptr;
-    double bestDist = 100000;
-    double bestNumAssigned = 10000;
 
     if (depot)
     {
         std::vector<BWAPI::Unit> mineralPatches = getMineralPatchesNearDepot(depot);
+		double bestDist = 100000;
+		double bestNumAssigned = 10000;
 
         for (auto & mineral : mineralPatches)
         {

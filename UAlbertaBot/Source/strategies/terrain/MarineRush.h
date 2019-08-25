@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		BWAPI::Player _self;
 	public:
-		MarineRush(BWAPI::Player self);
+		explicit MarineRush(BWAPI::Player self);
 		void getBuildOrderGoal(MetaPairVector& goal, int currentFrame) const final;
 	};
 }

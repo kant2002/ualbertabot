@@ -15,7 +15,7 @@ class ArenaPlayer_AttackClosest : public ArenaPlayer
 
 public:
 
-	ArenaPlayer_AttackClosest(std::shared_ptr<OpponentView> opponentView);
+	explicit ArenaPlayer_AttackClosest(std::shared_ptr<OpponentView> opponentView);
 
     void onStart();
     void onFrame(int currentFrame);

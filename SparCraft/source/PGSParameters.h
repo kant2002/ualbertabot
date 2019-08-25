@@ -19,7 +19,7 @@ class PGSParameters
 
 public:
 
-    PGSParameters(const size_t & playerID);
+    explicit PGSParameters(const size_t & playerID);
 
     void setEnemySeedPlayer(const PlayerPtr & player);
     void setIterations(const size_t & iterations);

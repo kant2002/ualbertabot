@@ -12,9 +12,7 @@ Debug_SSCAIT/
 Release_SSCAIT/
 
 UAlbertaBot/UAB_ErrorLog.txt
-UAlbertaBot/UAB_ErrorLog.txt
 *.pd_
-UAlbertaBot/UAB_ErrorLog.txt
 BOSS/VisualStudio/BOSS.VC.db
 *.ilk
 *.vspx
@@ -36,5 +34,5 @@ compile/
 /UAlbertaBot/bin/combatmanager*.txt
 /output.txt
 *.pdb
-.vscode/.cmaketools.json
-/.vscode
+.vscode/
+/akbot-cppcheck-build-dir

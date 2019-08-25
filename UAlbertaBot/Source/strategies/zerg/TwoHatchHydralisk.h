@@ -8,7 +8,7 @@ namespace AKBot
 	{
 		BWAPI::Player _self;
 	public:
-		TwoHatchHydralisk(BWAPI::Player self);
+		explicit TwoHatchHydralisk(BWAPI::Player self);
 		void getBuildOrderGoal(MetaPairVector& goal, int currentFrame) const final;
 	};
 }

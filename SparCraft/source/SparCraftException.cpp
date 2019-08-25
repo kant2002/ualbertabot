@@ -7,7 +7,7 @@ SparCraftException::SparCraftException()
 {
 }
 
-SparCraftException::SparCraftException(std::string ss) 
+SparCraftException::SparCraftException(const std::string& ss) 
     : _s(ss) 
 {
 }

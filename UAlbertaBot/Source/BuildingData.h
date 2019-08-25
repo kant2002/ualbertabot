@@ -27,7 +27,7 @@ public:
 	bool                    buildCommandGiven;
 	bool                    underConstruction;
 
-	Building() 
+	Building() noexcept
 		: desiredPosition   (0,0)
         , finalPosition     (BWAPI::TilePositions::None)
         , position          (0,0)

@@ -16,7 +16,7 @@ class Player_Random : public Player
 {
 	RandomInt rand;
 public:
-	Player_Random (const size_t & playerID);
+	explicit Player_Random (const size_t & playerID);
 	void getMove(const GameState & state, Move & move);
 	virtual PlayerPtr clone();
 };

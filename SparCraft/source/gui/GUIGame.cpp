@@ -98,7 +98,10 @@ void GUIGame::drawGame()
             {
                 if (!state.getMap()->isWalkable(x, y))
                 {
-                    GUITools::DrawRect(BWAPI::Position(x * 8, y * 8), BWAPI::Position((x + 1) * 8, (y + 1) * 8), Grid);
+                    GUITools::DrawRect(
+						SparCraft::Position(BWAPI::Position(x * 8, y * 8)),
+						SparCraft::Position(BWAPI::Position((x + 1) * 8, (y + 1) * 8)),
+						Grid);
                 }
             }
         }

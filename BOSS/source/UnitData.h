@@ -29,7 +29,7 @@ class UnitData
 
 public:
 
-    UnitData(const RaceID race);
+    explicit UnitData(const RaceID race);
 
     const RaceID            getRace() const;
     const bool              hasActionsInProgress() const;

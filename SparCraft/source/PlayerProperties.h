@@ -16,7 +16,7 @@ class PlayerProperties
 
 public:
 				PlayerProperties();
-				PlayerProperties(const BWAPI::Player & player);
+	explicit	PlayerProperties(const BWAPI::Player & player);
 
 	int			GetUpgradeLevel(BWAPI::UpgradeType upgrade) const;
 	bool		HasUpgrade(BWAPI::UpgradeType upgrade) const;
