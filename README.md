@@ -9,7 +9,7 @@ Author: Andrey Kurdyumov (kant2002@gmail.com)
 For mamaging dependencies used vcpkg
 
     # install dependencies
-    vcpkg install sdl2 sdl2-image
+    vcpkg install sdl2 sdl2-image boost-algorithm
 
 This is additional dependencies to Dave Churchill's bot.
 
