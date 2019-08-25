@@ -65,18 +65,33 @@ void AKBot::SparCraftCombatEstimator::setCombatUnits(
 		}
 
 		// Workers posible should be taken into account.
-		auto includeWorkers = _microConfiguration.IncludeWorkers;
-		if (ui.type.isWorker() && !includeWorkers)
+		const auto includeWorkers = _microConfiguration.IncludeWorkers;
+		if (ui.type.isWorker())
 		{
-			continue;
+			if (!includeWorkers)
+			{
+				continue;
+			}
+
+			// Find minimum distance between worker and our units.
+			auto minDistance = std::accumulate(ourCombatUnits.begin(), ourCombatUnits.end(), 1000, [ui](auto summator, auto unit) {
+				const auto distance = unit->getDistance(ui.lastPosition);
+				return std::min(summator, distance);
+			});
+			// Skip worker which are too far away, since they do not present threat.
+			if (minDistance > _microConfiguration.WorkerIgnoreDistance)
+			{
+				continue;
+			}
 		}
 
 		// if it's a bunker that has a nontrivial amount of hit points, replace it by 5 marines
 		if (ui.type == BWAPI::UnitTypes::Terran_Bunker && ui.lastHealth > 10)
 		{
-			double hpRatio = static_cast<double>(ui.lastHealth) / ui.type.maxHitPoints();
+			const double hpRatio = static_cast<double>(ui.lastHealth) / ui.type.maxHitPoints();
 
-			SparCraft::Unit marine(BWAPI::UnitTypes::Terran_Marine,
+			const SparCraft::Unit marine(
+				BWAPI::UnitTypes::Terran_Marine,
 				SparCraft::Position(ui.lastPosition),
 				ui.unitID,
 				getSparCraftPlayerID(ui.player),
@@ -88,7 +103,7 @@ void AKBot::SparCraftCombatEstimator::setCombatUnits(
 			// Add bonus which indicate that unit has additional range
 			// increase
 			// marine.setRangeBonus(32);
-			for (size_t i(0); i < 5; ++i)
+			for (size_t i = 0; i < 5; ++i)
 			{
 				s.addUnit(marine);
 			}
