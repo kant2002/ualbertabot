@@ -30,7 +30,7 @@
     },
     {
       "name": "x86-Release",
-      "generator": "Visual Studio 15 2017",
+      "generator": "Visual Studio 16 2019",
       "configurationType": "RelWithDebInfo",
       "inheritEnvironments": [ "msvc_x86" ],
       "buildRoot": "${workspaceRoot}\\build\\${name}",
