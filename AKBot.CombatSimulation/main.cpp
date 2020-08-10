@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <experimental/filesystem>
+#include <filesystem>
 #include <simulation\FAPCombatEstimator.h>
 #include <simulation\SparCraftCombatEstimator.h>
 #include "BWAPIOpponentView.h"
@@ -555,7 +555,7 @@ SparCraftCombatEstimator getSparCraft(std::shared_ptr<AKBot::GameImpl> gameImpl)
 	auto opponentView = std::make_shared<BWAPIOpponentView>(game);
 	auto logger = std::make_shared<AkBotTests::NullLogger>();
 	SparCraft::init();
-	auto path = std::experimental::filesystem::current_path();
+	auto path = std::filesystem::current_path();
 	auto sparcraftConfigFile = path.concat("/SparCraft_Config.txt").string();
 	SparCraft::AIParameters::Instance().parseFile(sparcraftConfigFile);
 	return SparCraftCombatEstimator(

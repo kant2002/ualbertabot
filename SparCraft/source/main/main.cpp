@@ -1,15 +1,15 @@
 #include "../SparCraft.h"
-#include <experimental/filesystem>
+#include <filesystem>
 #include "SparCraftExperiment.h"
 
 using namespace SparCraft;
-namespace filesystem = std::experimental::filesystem;
+namespace filesystem = std::filesystem;
 
 int main(int argc, char *argv[])
 {
-	auto path = filesystem::current_path();
+	auto path = std::filesystem::current_path();
 	auto sparcraftConfigPath = path / "SparCraft_Config.txt";
-	if (!filesystem::exists(sparcraftConfigPath))
+	if (!std::filesystem::exists(sparcraftConfigPath))
 	{
 		std::cout << "File SparCraft_Config.txt does not exists in the path " << path << std::endl;
 		return 1;

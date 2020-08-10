@@ -1,5 +1,6 @@
 #include "MoveArray.h"
 #include "SparCraftAssert.h"
+#include <random>
 
 using namespace SparCraft;
 
@@ -56,7 +57,11 @@ void MoveArray::shuffleMoveActions()
         // shuffle the movement actions for this unit
         if (moveEnd != -1 && moveBegin != -1 && moveEnd != moveBegin)
         {
-            std::random_shuffle(&_moves[u][moveBegin], &_moves[u][moveEnd]);
+            std::random_device rd;
+            std::mt19937 g(rd());
+
+            std::shuffle(&_moves[u][moveBegin], &_moves[u][moveEnd], g);
+
             resetMoveIterator();
         }
     }
